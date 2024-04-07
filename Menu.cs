@@ -3,7 +3,7 @@ using System;
 
 internal class Menu
 {
-    private readonly GameEngine _gameEngine = new(); 
+    private readonly MainGameEngine _gameEngine = new(); 
     internal void ShowMenu(string userName, DateTime date)
     {
         Console.Clear();
@@ -33,32 +33,34 @@ internal class Menu
                 Console.WriteLine("The game type cannot be empty. Please select one option.");
                 gameSelected = Console.ReadLine();
             }
-    
-            switch (gameSelected.Trim().ToLower())
-            {
-                case "v":
-                    Helpers.PrintGames();
-                    break;
-                case "a":
-                    _gameEngine.AdditionGame("Addition game");
-                    break;
-                case "s":
-                    _gameEngine.SubtractionGame("Subtraction game");
-                    break;
-                case "m":
-                    _gameEngine.MultiplicationGame("Multiplication game");
-                    break;
-                case "d":
-                    _gameEngine.DivisionGame("Division game");
-                    break;
-                case "q":
-                    Console.WriteLine("Goodbye");
-                    isGameOn = false;
-                    break;
-                default:
-                    Console.WriteLine("Invalid option.");
-                    break;
-            }
+
+            if (gameSelected != null)
+                switch (gameSelected.Trim().ToLower())
+                {
+                    case "v":
+                        Helpers.PrintGames();
+                        break;
+                    case "a":
+                        MainGameEngine.AdditionGame("Addition game");
+                        break;
+                    case "s":
+                        MainGameEngine.SubtractionGame("Subtraction game");
+                        break;
+                    case "m":
+                        _gameEngine.MultiplicationGame("Multiplication game");
+                        break;
+                    case "d":
+                        _gameEngine.DivisionGame("Division game");
+                        break;
+                    case "q":
+                        Console.Beep();
+                        Console.WriteLine("Goodbye");
+                        isGameOn = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
+                }
         } while (isGameOn);
     }
 }

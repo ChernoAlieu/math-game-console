@@ -3,7 +3,7 @@ using MathGame.Console.Models;
 namespace MathGame.Console;
 using System;
 
-internal class Helpers
+internal static class Helpers
 {
     private static readonly List<Game> Games = new();
     internal static string GetName()
@@ -43,7 +43,7 @@ internal class Helpers
         });
     }
 
-    internal static int[] GetDivisionNumbers()
+    internal static int[] GetEasyDivisionNumbers()
     {
         var random = new Random();
         var firstNumber = random.Next(0, 99);
@@ -63,6 +63,46 @@ internal class Helpers
         return result;
     }
     
+    internal static int[] GetMediumDivisionNumbers()
+    {
+        var random = new Random();
+        var firstNumber = random.Next(100, 999);
+        var secondNumber = random.Next(100, 999);
+
+        var result = new int[2];
+
+        while (firstNumber % secondNumber != 0)
+        {
+            firstNumber = random.Next(101, 1000);
+            secondNumber = random.Next(101, 1000);
+        }
+
+        result[0] = firstNumber;
+        result[1] = secondNumber;
+
+        return result;
+    }
+    
+    internal static int[] GetHardDivisionNumbers()
+    {
+        var random = new Random();
+        var firstNumber = random.Next(1000, 9999);
+        var secondNumber = random.Next(1000, 9999);
+
+        var result = new int[2];
+
+        while (firstNumber % secondNumber != 0)
+        {
+            firstNumber = random.Next(1001, 9999);
+            secondNumber = random.Next(1001, 9999);
+        }
+
+        result[0] = firstNumber;
+        result[1] = secondNumber;
+
+        return result;
+    }
+    
     internal static string?  ValidateUserAnswer( string userAnswer)
     {
         while (string.IsNullOrEmpty(userAnswer) || !Int32.TryParse(userAnswer, out _))
@@ -72,5 +112,20 @@ internal class Helpers
         }
 
         return userAnswer;
+    }
+
+    internal static string SelectLevel()
+    {
+        Console.WriteLine("Difficulty Level");
+        Console.WriteLine("*******************************************");
+        Console.WriteLine("Select the difficulty level:");
+        Console.WriteLine("E - Easy");
+        Console.WriteLine("M - Medium");
+        Console.WriteLine("H - Hard");
+        Console.WriteLine("Q - Back to main menu");
+        
+        var levelSelected = Console.ReadLine();
+
+        return levelSelected;
     }
 }
