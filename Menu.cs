@@ -6,8 +6,11 @@ internal class Menu
     private readonly GameEngine _gameEngine = new(); 
     internal void ShowMenu(string userName, DateTime date)
     {
+        Console.Clear();
         Console.WriteLine("***********************************************************************");
         Console.WriteLine($"Hey {userName}, it's {date.DayOfWeek} today\n");
+        Console.WriteLine("Press any key to show the menu");
+        Console.WriteLine("\n");
     
         var isGameOn = true;
     
@@ -24,6 +27,12 @@ internal class Menu
             Console.WriteLine("***********************************************************************");
     
             var gameSelected = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(gameSelected))
+            {
+                Console.WriteLine("The game type cannot be empty. Please select one option.");
+                gameSelected = Console.ReadLine();
+            }
     
             switch (gameSelected.Trim().ToLower())
             {

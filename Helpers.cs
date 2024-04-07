@@ -10,6 +10,12 @@ internal class Helpers
     {
         Console.WriteLine("Please enter your name: ");
         var username = Console.ReadLine();
+
+        while (string.IsNullOrEmpty(username))
+        {
+            Console.WriteLine("Name can't be empty");
+            username = Console.ReadLine();
+        }
         return username;
     }
 
@@ -55,5 +61,16 @@ internal class Helpers
         result[1] = secondNumber;
 
         return result;
+    }
+    
+    internal static string?  ValidateUserAnswer( string userAnswer)
+    {
+        while (string.IsNullOrEmpty(userAnswer) || !Int32.TryParse(userAnswer, out _))
+        {
+            Console.WriteLine("Your answer needs to be an integer. Try again.");
+            userAnswer = Console.ReadLine();
+        }
+
+        return userAnswer;
     }
 }
