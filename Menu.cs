@@ -3,7 +3,7 @@ using System;
 
 internal class Menu
 {
-    GameEngine gameEngine = new(); 
+    private readonly GameEngine _gameEngine = new(); 
     internal void ShowMenu(string userName, DateTime date)
     {
         Console.WriteLine("***********************************************************************");
@@ -28,19 +28,19 @@ internal class Menu
             switch (gameSelected.Trim().ToLower())
             {
                 case "v":
-                    Helpers.GetGames();
+                    Helpers.PrintGames();
                     break;
                 case "a":
-                    gameEngine.AdditionGame("Addition game");
+                    _gameEngine.AdditionGame("Addition game");
                     break;
                 case "s":
-                    gameEngine.SubtractionGame("Subtraction game");
+                    _gameEngine.SubtractionGame("Subtraction game");
                     break;
                 case "m":
-                    gameEngine.MultiplicationGame("Multiplication game");
+                    _gameEngine.MultiplicationGame("Multiplication game");
                     break;
                 case "d":
-                    gameEngine.DivisionGame("Division game");
+                    _gameEngine.DivisionGame("Division game");
                     break;
                 case "q":
                     Console.WriteLine("Goodbye");

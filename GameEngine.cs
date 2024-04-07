@@ -1,3 +1,5 @@
+using MathGame.Console.Models;
+
 namespace MathGame.Console;
 using System;
 
@@ -41,7 +43,7 @@ internal class GameEngine
             }
         }
 
-        Helpers.AddToHistory(score, "Addition");
+        Helpers.AddToHistory(score, GameType.Addition);
     }
 
     internal void SubtractionGame(string message)
@@ -77,12 +79,12 @@ internal class GameEngine
 
             if (i == 4)
             {
-                Console.WriteLine($"Game over. Your final score is {score}");
+                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
                 Console.ReadLine();
             }
         }
 
-        Helpers.AddToHistory(score, "Subtraction");
+        Helpers.AddToHistory(score, GameType.Subtraction);
     }
 
     internal void MultiplicationGame(string message)
@@ -118,12 +120,12 @@ internal class GameEngine
 
             if (i == 4)
             {
-                Console.WriteLine($"Game over. Your final score is {score} Press any key to go back to the main menu");
+                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
                 Console.ReadLine();
             }
         }
 
-        Helpers.AddToHistory(score, "Multiplication");
+        Helpers.AddToHistory(score, GameType.Multiplication);
     }
 
     internal void DivisionGame(string message)
@@ -158,11 +160,11 @@ internal class GameEngine
 
             if (i == 4)
             {
-                Console.WriteLine($"Game over. Your final score is {score} Press any key to go back to the main menu");
+                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
                 Console.ReadLine();
             }
         }
 
-        Helpers.AddToHistory(score, "Addition");
+        Helpers.AddToHistory(score, GameType.Division);
     }
 }

@@ -1,9 +1,11 @@
+using MathGame.Console.Models;
+
 namespace MathGame.Console;
 using System;
 
 internal class Helpers
 {
-    static List<string> games = new();
+    private static readonly List<Game> Games = new();
     internal static string GetName()
     {
         Console.WriteLine("Please enter your name: ");
@@ -11,24 +13,28 @@ internal class Helpers
         return username;
     }
 
-    internal static void GetGames()
+    internal static void PrintGames()
     {
         Console.Clear();
         Console.WriteLine("Games History");
         Console.WriteLine("*******************************************");
-        foreach (var game in games)
+        foreach (var game in Games)
         {
-            Console.WriteLine(game);
+            Console.WriteLine($"{game.Date} - {game.GameType}: {game.Score}pts");
         }
-
         Console.WriteLine("*******************************************");
         Console.WriteLine("Press any key to return to the Main Menu");
         Console.ReadLine();
     }
 
-    internal static void AddToHistory(int gameScore, string gameType)
+    internal static void AddToHistory(int gameScore, GameType gameType)
     {
-        games.Add($"{DateTime.Now} - {gameType}: {gameScore} pts");
+        Games.Add(new Game
+        {
+            Date = DateTime.Now,
+            Score = gameScore,
+            GameType = gameType
+        });
     }
 
     internal static int[] GetDivisionNumbers()
