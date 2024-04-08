@@ -1,5 +1,4 @@
 using MathGame.Console.Models;
-
 namespace MathGame.Console.GameEngines;
 using System;
 
@@ -13,12 +12,14 @@ public static class AdditionEngine
     internal static void EasyAddition()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+        
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(1, 9);
             _secondNumber = Random.Next(1, 9);
         
-            Console.WriteLine($"{_firstNumber} + {_secondNumber}");
+            Console.Write($"{_firstNumber} + {_secondNumber} = ");
             var userAnswer = Console.ReadLine();
         
             userAnswer = Helpers.ValidateUserAnswer(userAnswer);
@@ -28,27 +29,27 @@ public static class AdditionEngine
             if (userAnswer != null && int.Parse(userAnswer) == correctAnswer)
             {
                 Console.WriteLine("Your answer was correct");
+                Console.WriteLine("***********************");
                 score++;
             }
             else
             {
                 Console.WriteLine("Your answer was incorrect");
+                Console.WriteLine("***********************");
             }
         
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Addition);
+        Helpers.AddToHistory(score, GameType.Addition, DifficultyLevel.Easy, numQuestions);
     }
 
     internal static void MediumAddition()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+        
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(10, 99);
             _secondNumber = Random.Next(10, 99);
@@ -63,27 +64,27 @@ public static class AdditionEngine
             if (userAnswer != null && int.Parse(userAnswer) == correctAnswer)
             {
                 Console.WriteLine("Your answer was correct");
+                Console.WriteLine("***********************");
                 score++;
             }
             else
             {
                 Console.WriteLine("Your answer was incorrect");
+                Console.WriteLine("***********************");
             }
         
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Addition);
+        Helpers.AddToHistory(score, GameType.Addition, DifficultyLevel.Medium, numQuestions);
     }
 
     internal static void HardAddition()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+        
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(100, 999);
             _secondNumber = Random.Next(100, 999);
@@ -98,20 +99,18 @@ public static class AdditionEngine
             if (userAnswer != null && int.Parse(userAnswer) == correctAnswer)
             {
                 Console.WriteLine("Your answer was correct");
+                Console.WriteLine("***********************");
                 score++;
             }
             else
             {
                 Console.WriteLine("Your answer was incorrect");
+                Console.WriteLine("***********************");
             }
-        
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Addition);
+        Helpers.AddToHistory(score, GameType.Addition, DifficultyLevel.Hard, numQuestions);
     }
 }

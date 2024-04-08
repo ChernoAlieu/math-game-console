@@ -1,6 +1,11 @@
 ﻿using MathGame.Console;
 
-var menu = new Menu();
-var date = DateTime.UtcNow;
 var name = Helpers.GetName();
+
+
+var date = DateTime.UtcNow;
+
+var menu = new Menu();
+
+
 menu.ShowMenu(name, date);

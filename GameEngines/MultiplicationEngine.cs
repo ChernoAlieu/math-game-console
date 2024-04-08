@@ -1,5 +1,4 @@
 using MathGame.Console.Models;
-
 namespace MathGame.Console.GameEngines;
 using System;
 
@@ -9,11 +8,13 @@ public static class MultiplicationEngine
 
     private static int _firstNumber;
     private static int _secondNumber;
-    
+
     internal static void EasyMultiplication()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(1, 9);
             _secondNumber = Random.Next(1, 9);
@@ -35,20 +36,18 @@ public static class MultiplicationEngine
                 Console.WriteLine("Your answer was incorrect");
             }
         
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}.\nPress any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Multiplication);
+        Helpers.AddToHistory(score, GameType.Multiplication, DifficultyLevel.Easy, numQuestions);
     }
     
     internal static void MediumMultiplication()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(10, 99);
             _secondNumber = Random.Next(10, 99);
@@ -70,20 +69,18 @@ public static class MultiplicationEngine
                 Console.WriteLine("Your answer was incorrect");
             }
         
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}.\nPress any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Multiplication);
+        Helpers.AddToHistory(score, GameType.Multiplication, DifficultyLevel.Medium, numQuestions);
     }
     
     internal static void HardMultiplication()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(100, 999);
             _secondNumber = Random.Next(100, 999);
@@ -105,13 +102,9 @@ public static class MultiplicationEngine
                 Console.WriteLine("Your answer was incorrect");
             }
         
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}.\nPress any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Multiplication);
+        Helpers.AddToHistory(score, GameType.Multiplication, DifficultyLevel.Hard, numQuestions);
     }
 }

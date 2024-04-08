@@ -1,11 +1,13 @@
 using MathGame.Console.Models;
 
 namespace MathGame.Console;
+
 using System;
 
 internal static class Helpers
 {
     private static readonly List<Game> Games = new();
+
     internal static string GetName()
     {
         Console.WriteLine("Please enter your name: ");
@@ -16,6 +18,7 @@ internal static class Helpers
             Console.WriteLine("Name can't be empty");
             username = Console.ReadLine();
         }
+
         return username;
     }
 
@@ -23,23 +26,29 @@ internal static class Helpers
     {
         Console.Clear();
         Console.WriteLine("Games History");
-        Console.WriteLine("*******************************************");
         foreach (var game in Games)
         {
-            Console.WriteLine($"{game.Date} - {game.GameType}: {game.Score}pts");
+            Console.WriteLine("*******************************************");
+            Console.WriteLine($"Date - {game.Date}\n" +
+                              $"Game Type - {game.GameType}\n" +
+                              $"Difficulty Level - {game.DifficultyLevel}\n" +
+                              $"Score - {game.Score}/{game.NumberOfQuestions}pts");
+            Console.WriteLine("*******************************************");
         }
-        Console.WriteLine("*******************************************");
+        
         Console.WriteLine("Press any key to return to the Main Menu");
         Console.ReadLine();
     }
 
-    internal static void AddToHistory(int gameScore, GameType gameType)
+    internal static void AddToHistory(int gameScore, GameType gameType, DifficultyLevel level, int numQuestions)
     {
         Games.Add(new Game
         {
             Date = DateTime.Now,
             Score = gameScore,
-            GameType = gameType
+            GameType = gameType,
+            DifficultyLevel = level,
+            NumberOfQuestions = numQuestions
         });
     }
 
@@ -62,7 +71,7 @@ internal static class Helpers
 
         return result;
     }
-    
+
     internal static int[] GetMediumDivisionNumbers()
     {
         var random = new Random();
@@ -82,7 +91,7 @@ internal static class Helpers
 
         return result;
     }
-    
+
     internal static int[] GetHardDivisionNumbers()
     {
         var random = new Random();
@@ -102,8 +111,8 @@ internal static class Helpers
 
         return result;
     }
-    
-    internal static string?  ValidateUserAnswer( string userAnswer)
+
+    internal static string? ValidateUserAnswer(string userAnswer)
     {
         while (string.IsNullOrEmpty(userAnswer) || !Int32.TryParse(userAnswer, out _))
         {
@@ -123,9 +132,27 @@ internal static class Helpers
         Console.WriteLine("M - Medium");
         Console.WriteLine("H - Hard");
         Console.WriteLine("Q - Back to main menu");
-        
+
         var levelSelected = Console.ReadLine();
 
         return levelSelected;
+    }
+
+    internal static int ChooseNumberOfQuestions()
+    {
+        Console.Clear();
+        Console.Write("Please enter the number of questions you want to answer: ");
+        var numOfQuestions = Console.ReadLine();
+
+        return int.Parse(numOfQuestions ?? throw new InvalidOperationException());
+    }
+
+    internal static void GameOverMessage(int i, int score, int numQuestions)
+    {
+        if (i == numQuestions - 1)
+        {
+            Console.WriteLine($"Game over.\nYour final score is {score}/{numQuestions}.\nPress any key to go back to the main menu");
+            Console.ReadLine();
+        }
     }
 }

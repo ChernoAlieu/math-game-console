@@ -53,6 +53,7 @@ internal class Menu
                         _gameEngine.DivisionGame("Division game");
                         break;
                     case "q":
+                        Console.Clear();
                         Console.Beep();
                         Console.WriteLine("Goodbye");
                         isGameOn = false;

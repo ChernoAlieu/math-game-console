@@ -1,5 +1,4 @@
 using MathGame.Console.Models;
-
 namespace MathGame.Console.GameEngines;
 using System;
 
@@ -7,13 +6,15 @@ public static class SubtractionEngine
 {
     private static readonly Random Random = new();
 
-    static int _firstNumber;
-    static int _secondNumber;
+    private static int _firstNumber;
+    private static int _secondNumber;
     
     internal static void EasySubtraction()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+        
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(1, 9);
             _secondNumber = Random.Next(1, 9);
@@ -35,20 +36,17 @@ public static class SubtractionEngine
                 Console.WriteLine("Your answer was incorrect");
             }
         
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Subtraction);
+        Helpers.AddToHistory(score, GameType.Subtraction, DifficultyLevel.Easy, numQuestions);
     }
     
     internal static void MediumSubtraction()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(10, 99);
             _secondNumber = Random.Next(10, 99);
@@ -70,20 +68,18 @@ public static class SubtractionEngine
                 Console.WriteLine("Your answer was incorrect");
             }
         
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Subtraction);
+        Helpers.AddToHistory(score, GameType.Subtraction, DifficultyLevel.Medium, numQuestions);
     }
     
     internal static void HardSubtraction()
     {
         var score = 0;
-        for (var i = 0; i < 5; i++)
+        var numQuestions = Helpers.ChooseNumberOfQuestions();
+        
+        for (var i = 0; i < numQuestions; i++)
         {
             _firstNumber = Random.Next(100, 999);
             _secondNumber = Random.Next(100, 999);
@@ -105,13 +101,9 @@ public static class SubtractionEngine
                 Console.WriteLine("Your answer was incorrect");
             }
         
-            if (i == 4)
-            {
-                Console.WriteLine($"Game over. Your final score is {score}. Press any key to go back to the main menu");
-                Console.ReadLine();
-            }
+            Helpers.GameOverMessage(i, score, numQuestions);
         }
         
-        Helpers.AddToHistory(score, GameType.Subtraction);
+        Helpers.AddToHistory(score, GameType.Subtraction, DifficultyLevel.Hard, numQuestions);
     }
 }
